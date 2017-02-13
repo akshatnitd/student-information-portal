@@ -143,3 +143,8 @@ div.dob{
 a {
 	text-decoration: none;
 }
+
+div#err {
+	color: #f00;
+	padding-bottom: 20px;
+}
