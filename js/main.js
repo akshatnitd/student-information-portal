@@ -31,41 +31,54 @@ $(".next1").click(function(){
      var dob=current_fs[0].elements.dob.value;
      var phone=current_fs[0].elements.phone.value;
      var addr=current_fs[0].elements.address.value;
+     var err_str='';
 
-    if(!fname)
+    if(fname.length == 0)
     {
         err=err+1;
-        console.log("Fname");
+        if(fname.length == 0)
+            err_str = 'First Name field empty<br>';
+
+        else
+            err_str = 'Incorrect name format<br>';
     }
 
-    if(!lname)
+    if(lname == 0)
     {
         err=err+1;
-        console.log("Lname");
+        if(lname.length == 0)
+            err_str += 'Last Name field empty<br>';
+
+        else
+            err_str += 'Incorrect name format<br>';
     }
 
      if(gen == 'none')
     {
         err=err+1;
-        console.log("gen");
+
+        err_str += 'Select a valid gender<br>';
     }
     
     if(!dob)
     {
         err=err+1;
-        console.log("dob");
+        err_str += 'Select a valid DOB<br>';
     }
 
      if(phone.length < 10)
     {
         err=err+1;
-        console.log("phone");
+        if(phone.length == 0 )
+            err_str += 'Phone no. field empty<br>';
+        else
+            err_str += 'Phone no. should be a 10-digit number<br>';
     }
 
-     if(!addr)
+     if(addr.length == 0)
     {
         err=err+1;
-        console.log("addr");
+        err_str += 'Address field empty<br>';
     }
 
 
@@ -107,18 +120,9 @@ $(".next1").click(function(){
 
 else
 {
-//     if(err==2)
-//     $('div#err').html('Incorrect password!');
 
-//     else if(err==1)
-//     $('div#err').html('Incorrect email!');
-
-// else
-    $('div#err').html('Incorrect credentials!');
+    $('div#err').html(err_str);
 }
-
-
-	
 	
 });
 
@@ -138,29 +142,35 @@ $(".next2").click(function(){
      var program=current_fs[0].elements.program.value;
      var dept=current_fs[0].elements.dept.value;
      var sem=current_fs[0].elements.sem.value;
+     var err_str='';
 
-    if(!roll)
+    if(roll.length == 0)
     {
         err=err+1;
-        console.log("Roll");
+        if(roll.length == 0)
+            err_str += 'Roll number field empty<br>';
+
+        else
+            err_str += 'Incorrect roll number format<br>';
+        
     }
 
     if(program == 'none')
     {
         err=err+1;
-        console.log("Program");
+        err_str += 'Select a valid program<br>';
     }
 
      if(dept == 'none')
     {
         err=err+1;
-        console.log("dept");
+        err_str += 'Select a valid department<br>';
     }
     
     if(sem == 'none')
     {
         err=err+1;
-        console.log("dob");
+        err_str += 'Select a valid semester<br>';
     }
 
     if(err == 0)
@@ -202,7 +212,7 @@ $(".next2").click(function(){
 else
 {
 
-    $('div#err').html('Incorrect credentials!');
+    $('div#err').html(err_str);
 }
 });
 
@@ -250,25 +260,31 @@ $(".submit").click(function(){
      var email=current_fs[0].elements.email.value;
      var pass=current_fs[0].elements.pass.value;
      var cpass=current_fs[0].elements.cpass.value;
+     var err_str='';
 
-    if(!validateEmail(email) || !email)
+    if(!validateEmail(email) || email.length == 0)
     {
         err=err+1;
-        console.log('email');
+        if(email.length == 0)
+            err_str = 'Email field empty<br>';
 
+        else
+            err_str = 'Incorrect email format<br>';
     }
 
     if(pass.length < 8 )
     {
         err=err+1;
-        console.log('pass');
+        if(pass.length == 0 )
+            err_str += 'Password field empty<br>';
+        else
+            err_str += 'Password too small<br>';
     }
-
 
     if(pass != cpass )
     {
         err=err+1;
-        console.log('cpass');
+        err_str += "Both the passwords doesn't match<br>";
     }
 
     if(err == 0)
@@ -280,7 +296,7 @@ $(".submit").click(function(){
 
 else
 {
-    $('div#err').html('Incorrect credentials!');
+    $('div#err').html(err_str);
 }
 
 });
