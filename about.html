@@ -41,13 +41,10 @@
                 <b>Location</b>
             </div>
             <div style="text-align: justify; padding: 20px;">
-
-                <img src="/images/map1.jpg" border="0" height="200" width="100%"><br><br>
+            <div id="map"></div>
               <p>
-			The Institute is located about 160 KMs north-west of Kolkata on the Howrah-Delhi main railway route and overlooking the National Highway No. 2(the great Grand- Trunk Road). The Institute spreads over an area of 187 acres of land. It is fully residential and co-educational. At present about 2500 boys and 500 girls reside in seven boys' hostels and two girls' hostels. The annual undergraduate intake is more than 1000 students.<br><br>
-			</p>
-		  <img src="/images/map2.jpg" border="0" height="230" width="100%">
-
+			     The Institute is located about 160 KMs north-west of Kolkata on the Howrah-Delhi main railway route and overlooking the National Highway No. 2(the great Grand- Trunk Road). The Institute spreads over an area of 187 acres of land. It is fully residential and co-educational. At present about 2500 boys and 500 girls reside in seven boys' hostels and two girls' hostels. The annual undergraduate intake is more than 1000 students.<br><br>
+			 </p>
             </div>
         </div>
      <div class="box">
@@ -62,8 +59,27 @@
                 </p>
             </div>
         </div>
-    <script src="/js/jquery-3.1.1.min.js"></script>
-    <script src="/js/jquery.easing.1.3.js"></script>
-    <script src="/js/main.js"></script>
+
+    <script>
+    function initMap() {
+        // Add latitude and longitude of the college
+        var college = {lat: 23.547619, lng: 87.289375};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 15,
+            center: college
+        });
+        var marker = new google.maps.Marker({
+            position: college,
+            map: map
+        });
+    }
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS8BqZUJVDS10qTFvq-4VMhwCRvwzyi9A&callback=initMap">
+</script>
+
+<script src="/js/jquery-3.1.1.min.js"></script>
+<script src="/js/jquery.easing.1.3.js"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>
