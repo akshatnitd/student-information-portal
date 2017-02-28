@@ -2,13 +2,14 @@ var validateEmail = function (email) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
-
-$( "#msform" ).submit(function( event ) {  
-
-    event.preventDefault();
+ 
+var loginsubmit=function() {  
+    console.log();
     var err=0;
     var email=event.currentTarget.elements.email.value;
+    email=email.trim();
     var pass=event.currentTarget.elements.pass.value;
+    pass=pass.trim();
     var err_str='';
 
     if(!validateEmail(email) || email.length == 0)
@@ -33,12 +34,13 @@ $( "#msform" ).submit(function( event ) {
     if(err == 0)
     {
         $('div#err').html('');
-    //Backend
+        return true;
     }
 
     else
     {
         $('div#err').html(err_str);
+        return false;
     }
 
-});
+};
