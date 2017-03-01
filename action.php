@@ -49,7 +49,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         else
         {
             echo "success\n";
-            header('Location: success.html');   
+            header('Location: home.html');   
             //echo json_encode(array("result"=>$result));    
         }
         mysqli_close($con);
