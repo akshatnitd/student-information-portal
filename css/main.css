@@ -144,7 +144,7 @@ a {
 	text-decoration: none;
 }
 
-div#err {
+div.err {
 	color: #f00;
 	padding-bottom: 20px;
 }

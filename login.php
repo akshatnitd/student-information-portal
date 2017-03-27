@@ -53,12 +53,20 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 
         if (empty($result)) {
             //$('div#err').html('Incorrect credentials');
-            //echo "Failed\n";            
+            //echo "Failed\n"; 
+            $error = true;           
         }
         else
         {
+
+            session_start();
+            $_SESSION['email']=$_POST["email"];
+            $_SESSION['pass']=$_POST["pass"];
+            $_SESSION['type']='stu';
             echo "success\n";
-            header('Location: home.html');   
+            //$_SESSION['email']=$_POST["email"];
+            //$_SESSION['pass']=$_POST["pass"];
+            header('Location: home.php');   
             //echo json_encode(array("result"=>$result));    
         }
 
@@ -79,12 +87,17 @@ if($_SERVER['REQUEST_METHOD']=='POST')
         <fieldset>
             <h2 class="fs-title">Enter your login details</h2>
             <br />
-            <div id='err'></div>
-            <input type="text" id='email' name="email" placeholder="Email" required/>
-            <input type="password" id='pass' name="pass" placeholder="Password" required/>
+            <div id='err'>
+                <?php if ($error)
+                    echo "<div style='color: #f00; padding-bottom: 10px;' >Incorrect credentials!</div>"
+                    ?>
+            </div>
+            <input type="text" id='email' name="email" placeholder="Email" onfocusout="emailfunc()" required/>
+            <div class='err' id='err1'></div>
+            <input type="password" id='pass' name="pass" placeholder="Password" onfocusout="passfunc()" required/>
+            <div class='err' id='err2'></div>
 
             <input id='login_btn' type="submit" name="submit" class="action-button" value="Submit" />
-
         </fieldset>
     </form>
 

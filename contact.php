@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <html>
 <head>
     <title>SIP - Contacts</title>
@@ -9,24 +13,38 @@
 <body>
     <header>
         <ul>
+            <?php
+
+                 if(isset($_SESSION['email']))
+                    echo "<li><a href='home.php'><i class='fa fa-home'></i> Home</a></li>";        
+                
+                
+            ?>
             <li>
-                <a href='home.html'><i class="fa fa-home"></i> Home</a>
-            </li>
-            <li>
-                <a href='about.html'><i class="fa fa-info"></i> About Us</a>
-            </li>
-            <li>
-                <a href='gallery.html'><i class="fa fa-picture-o"></i> Gallery</a>
-            </li>
-            <li>
-                <a href='notice.html'><i class="fa fa-sticky-note"></i> Notice Board</a>
+                <a  href='about.php'><i class="fa fa-info"></i> About Us</a>
             </li>
             <li>
-                <a class='active' href='contact.html'><i class="fa fa-phone"></i> Contact Us</a>
+                <a href='gallery.php'><i class="fa fa-picture-o"></i> Gallery</a>
             </li>
-            <li style="float: right;">
-                <a href='index.html'><i class="fa fa-sign-in"></i> Sign Out</a>
+            <li>
+                <a href='notice.php'><i class="fa fa-sticky-note"></i> Notice Board</a>
             </li>
+            <li>
+                <a class='active' href='contact.php'><i class="fa fa-phone"></i> Contact Us</a>
+            </li>
+
+            <?php
+
+             if(!isset($_SESSION['email']))
+            {
+                echo "<li style='float: right;'><a href='index.php'><i class='fa fa-sign-in'></i> Sign In / Sign Up</a></li>";        
+            
+            }
+            else
+            {
+                echo "<li style='float: right;'><a href='logout.php'><i class='fa fa-sign-in'></i> Sign Out</a></li><li style='float: right;'><a href='profile.php'><i class='fa fa-user'></i> My Profile</a></li>";
+            }  
+            ?>
         </ul>
     </header>
 
