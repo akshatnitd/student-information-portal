@@ -2,13 +2,14 @@
 session_start();
 if(!isset($_SESSION['type']) || $_SESSION['type']!= 'admin')
 {
+
 	header("location: adminlogin.php");
 }
 define('HOST','localhost');
 define('USER','root');
-define('PASS','labwebsite');
+define('PASS','');
 define('DB','student_information_portal');
-
+$email=$_SESSION['email'];
 $con = mysqli_connect(HOST,USER,PASS,DB);
 
 $sql = "SELECT * FROM users WHERE  status='inactive'";
@@ -35,7 +36,7 @@ if(isset($res))
     ));
 	}
 
-    echo json_encode(array("result"=>$result[1]['fname'])); 
+    //echo json_encode(array("result"=>$result[1]['fname'])); 
 }
 
 ?>
@@ -45,15 +46,48 @@ if(isset($res))
 	<title>SIP - Admin Login</title>
 	<link rel = "stylesheet"
 	type = "text/css"
-	href = "/css/main.css" />
+	href = "/css/home.css" />
 </head>
+
 <body>
 	<header>
-		<h2 class="fs-title" style="text-align: center; color: #fff; font-size: 24px; padding-top: 50px;">Admin Page</h2>
+		<h2 class="fs-title" style="text-align: center; color: #fff; font-size: 24px; padding-top: 0px;">Welcome to Admin</h2>
 	</header>
 	<!-- multistep form -->
-	WELCOME TO ADMIN
+	 <div class="box">
+        <div class='in-box'>
+            <b>Hello <?php echo $email;?></b>
+        </div>
+        <div class='text'>
+            <p>
+                <a href="logout.php">Click here to log out</a>
+            </p>
+        </div>
+    </div>
+	<div class="box">
 
+        <div class='in-box'>
+            <b>Details of students</b>
+        </div>
+        <div style="text-align: justify; padding: 20px;">
+            <?php if (count($result) > 0): ?>
+<table>
+  <thead>
+    <tr>
+      <th><?php echo implode('</th><th>', array_keys(current($result))); ?></th>
+    </tr>
+  </thead>
+  <tbody>
+<?php foreach ($result as $row): array_map('htmlentities', $row); ?>
+    <tr>
+      <td><?php echo implode('</td><td>', $row); ?></td>
+    </tr>
+<?php endforeach; ?>
+  </tbody>
+</table>
+<?php endif; ?>
+        </div>
+    </div>
 
 
 	<h3><a href="logout.php">Click here to log out</a></h3>

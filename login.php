@@ -11,9 +11,9 @@
  
 define('HOST','localhost');
 define('USER','root');
-define('PASS','labwebsite');
+define('PASS','');
 define('DB','student_information_portal');
-
+$error=false;
 function test_input($data)
 {
     $data = trim($data);
@@ -24,6 +24,7 @@ function test_input($data)
 
 if($_SERVER['REQUEST_METHOD']=='POST')
 {
+    //$error=false;
     $email = test_input($_POST["email"]);
     $pass = test_input($_POST["pass"]);
 

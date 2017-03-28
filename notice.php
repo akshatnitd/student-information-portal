@@ -59,20 +59,23 @@ session_start();
 <?php
 define('HOST','localhost');
 define('USER','root');
-define('PASS','labwebsite');
+define('PASS','');
 define('DB','student_information_portal');
 // Create connection
  $conn = mysqli_connect(HOST,USER,PASS,DB);
  $sql = "SELECT * FROM notice ";
  $res = mysqli_query($conn,$sql);
 
- $res = array();
-    echo json_encode(array("result"=>$res));    
+ $result = array();
+    //echo json_encode(array("result"=>$res));    
     if(isset($res))
     {
         while($row = mysqli_fetch_array($res)){
             array_push($result,
-            array('content'=>$row[0]));
+            array('id'=>$row[0],
+                'type'=>$row[1],
+                'content'=>$row[2],
+                'data'=>$row[3]));
         }
 
         if (empty($result)) {
@@ -80,9 +83,9 @@ define('DB','student_information_portal');
         }
         else
         {
-            echo "success\n";
+            //echo "success\n";
             
-            echo json_encode(array("result"=>$result));    
+            //echo json_encode(array("result"=>$result));    
         }
 
         mysqli_close($conn);
@@ -91,14 +94,26 @@ define('DB','student_information_portal');
     {
         echo "Failed conn\n";
     }
-    $conn->close();
+    //$conn->close();
 ?>
+<?php if (count($result) > 0): ?>
+<table>
+  <thead>
+    <tr>
+      <th><?php echo implode('</th><th>', array_keys(current($result))); ?></th>
+    </tr>
+  </thead>
+  <tbody>
+<?php foreach ($result as $row): array_map('htmlentities', $row); ?>
+    <tr>
+      <td><?php echo implode('</td><td>', $row); ?></td>
+    </tr>
+<?php endforeach; ?>
+  </tbody>
+</table>
+<?php endif; ?>
 
-            <ul>
-                <li>Notice 1</li>
-                <li>Notice 2</li>
-                <li>Notice 3</li>
-            </ul>
+            
         </div>
     </div>
 
