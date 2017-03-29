@@ -63,7 +63,7 @@
         <!-- fieldsets -->
         <fieldset>
        <h1>Hello <?php echo $email;?></h1>
-<h3><a href="logout.php">Click here to log out</a></h3>
+        <br />
     Select image to upload:
     <br><br>
     <input type="file" name="fileToUpload" id="fileToUpload">

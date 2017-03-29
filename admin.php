@@ -8,35 +8,12 @@ define('HOST','localhost');
 define('USER','root');
 define('PASS','labwebsite');
 define('DB','student_information_portal');
-
+$email=$_SESSION['email'];
 $con = mysqli_connect(HOST,USER,PASS,DB);
 
 $sql = "SELECT * FROM users WHERE  status='inactive'";
 
-$res = mysqli_query($con,$sql);
-     
-$result = array();
-    
-if(isset($res))
-{
-	while($row = mysqli_fetch_array($res)){
-    array_push($result,array('fname'=>$row[0],
-						    'lname'=>$row[1],
-						    'gender'=>$row[2],
-						    'dob'=>$row[3],
-						    'addr'=>$row[4],
-						    'phone'=>$row[5],
-						    'regno'=>$row[6],
-						    'roll'=>$row[7],
-						    'prog'=>$row[8],
-						    'dept'=>$row[9],
-						    'sem'=>$row[10],
-						    'email'=>$row[11]
-    ));
-	}
-
-    echo json_encode(array("result"=>$result[1]['fname'])); 
-}
+$res = $con->query($sql);
 
 ?>
 
@@ -45,18 +22,104 @@ if(isset($res))
 	<title>SIP - Admin Login</title>
 	<link rel = "stylesheet"
 	type = "text/css"
-	href = "/css/main.css" />
+	href = "/css/home.css" />
+	<link rel = "stylesheet"
+	type = "text/css"
+	href = "/css/admin.css" />
+
 </head>
 <body>
-	<header>
-		<h2 class="fs-title" style="text-align: center; color: #fff; font-size: 24px; padding-top: 50px;">Admin Page</h2>
-	</header>
 	<!-- multistep form -->
-	WELCOME TO ADMIN
+	 <div class="box">
+        <div class='in-box'>
+            <b>Hello <?php echo $email;?></b>
+        </div>
+        <div class='text'>
+        <a href="logout.php">
+        <input type="button" value="SignOut" class='action-button'/>
+        </a>
+        </div>
+    </div>
+	<div class="box">
+        <div class='in-box'>
+            <b>Details of students to be activated</b>
+        </div>
+        <div style="text-align: justify; padding: 20px;">
+            <?php if ($res->num_rows > 0) {
+              while($row = $res->fetch_assoc()) {
+            echo "<form method='POST' action='activate.php'>
+                  <table>
+                  <tbody>
+                  <tr>
+                  <td>First Name</td>
+                  <td>$row[firstname]</td>
+                  </tr>
 
+                  <tr>
+                  <td>Last Name</td>
+                  <td>$row[lastname]</td>
+                  </tr>
 
+                  <tr>
+                  <td>Gender</td>
+                  <td>$row[gender]</td>
+                  </tr>
 
-	<h3><a href="logout.php">Click here to log out</a></h3>
+                  <tr>
+                  <td>DOB</td>
+                  <td>$row[dob]</td>
+                  </tr>
+
+                  <tr>
+                  <td>Phone</td>
+                  <td>$row[phone]</td>
+                  </tr>
+
+                  <tr>
+                  <td>Reg no</td>
+                  <td>$row[regno]</td>
+                  </tr>
+
+                  <tr>
+                  <td>Roll no</td>
+                  <td>$row[roll]</td>
+                  </tr>
+
+                  <tr>
+                  <td>Program</td>
+                  <td>$row[program]</td>
+                  </tr>
+
+                  <tr>
+                  <td>Dept</td>
+                  <td>$row[dept]</td>
+                  </tr>
+
+                  <tr>
+                  <td>Semester</td>
+                  <td>$row[sem]</td>
+                  </tr>
+
+                  <tr>
+                  <td>Email</td>
+                  <td><input type='text' name= 'email' value ='$row[email]'/> </td>
+                  </tr>
+                  <tr><td><input type='submit' value='Activate' class='action-button'/></td></tr>
+                  </tbody>
+                  </table>
+                  </form>";
+                }
+              echo "</div>";
+            }
+            else {
+              echo "<div id='status'>
+                  No inactive user
+                  </div>"; 
+            $conn->close();
+        }?>
+
+    </div>
+
 	<script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/js/jquery.easing.1.3.js"></script>
     <script src="/js/main.js"></script>

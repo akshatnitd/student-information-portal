@@ -13,7 +13,7 @@ define('HOST','localhost');
 define('USER','root');
 define('PASS','labwebsite');
 define('DB','student_information_portal');
-
+$error=false;
 function test_input($data)
 {
     $data = trim($data);

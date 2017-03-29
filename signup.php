@@ -57,7 +57,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 
     else
     {
-         $sql = "INSERT INTO users (firstname, lastname, gender, dob, phone, addr, roll, program, dept, sem, email, password) VALUES ('$fname', '$lname', '$gen', '$dob', '$phone', '$addr', '$roll', '$prog', '$dept', '$sem', '$email', '$pass') ";
+         $sql = "INSERT INTO users (firstname, lastname, gender, dob, phone, addr, regno, roll, program, dept, sem, email, password) VALUES ('$fname', '$lname', '$gen', '$dob', '$phone', '$addr', '$regno', '$roll', '$prog', '$dept', '$sem', '$email', '$pass') ";
 
         $res = mysqli_query($con,$sql);
 
