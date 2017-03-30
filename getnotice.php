@@ -1,7 +1,7 @@
 <?php
 define('HOST','localhost');
 define('USER','root');
-define('PASS','labwebsite');
+define('PASS','');
 define('DB','student_information_portal');
 // Create connection
  $conn = mysqli_connect(HOST,USER,PASS,DB);// Check connection
