@@ -4,9 +4,51 @@
         {
                 header("location: login.php");
         }
+        $roll_=$_SESSION['roll'];
         $email=$_SESSION['email'];
         $pass=$_SESSION['pass'];
-
+        //echo $email;
+        //echo $roll_;
+        $fname=$_SESSION['fname'];
+        $lname=$_SESSION['lname'];
+        $gender=$_SESSION['gender'];
+        $dob=$_SESSION['dob'];
+        $addr=$_SESSION['addr'];
+        $prog=$_SESSION['prog'];
+        $dept=$_SESSION['dept'];
+        $sem=$_SESSION['sem'];
+        $ph=$_SESSION['ph'];
+        //echo $ph;
+        //echo $email;
+        //echo $roll_;
+        //echo $pass;
+        //echo $fname;
+        //echo $lname;
+        //echo $gender;
+        //echo $dob;
+        //echo $addr;
+        //echo $prog;
+        //echo $dept;
+        //echo $sem;
+        //echo $roll_;
+        function isLoginSessionExpired() {
+    $login_session_duration = 60; 
+    $current_time = time(); 
+    if(isset($_SESSION['loggedin_time']) and isset($_SESSION['roll'])){  
+        if(((time() - $_SESSION['loggedin_time']) > $login_session_duration)){ 
+            return true; 
+        } 
+    }
+    return false;
+}
+if(isLoginSessionExpired()) {
+        $_SESSION['counter']=true;
+        header("Location:logout.php?session_expired=1");
+    }
+    else
+    {
+        $_SESSION['loggedin_time'] = time();
+    }
 ?>
 
 <html>
@@ -59,16 +101,39 @@
     </header>
 <div>
   
-      <form id="msform" action="upload.php" method="post" enctype="multipart/form-data">
+      <form id="msform" style="width: 1000px; text-align: left;"action="upload.php" method="post" enctype="multipart/form-data">
         <!-- fieldsets -->
         <fieldset>
-       <h1>Hello <?php echo $email;?></h1>
-        <br />
-    Select image to upload:
+       <h1 style="text-align: center;">Hello! <?php echo $fname;?></h1>
+<h3><a href="logout.php">Click here to log out</a></h3>
+<br/>
+<h3>Here are your profile details:</h3>
+<br/>
+    <strong>First Name : </strong> <?php echo $fname;?><br/>
+    <strong>Last Name : </strong> <?php echo $lname;?><br/>
+    <strong>Gender : </strong> <?php echo $gender;?><br/>
+    <strong>Date of birth : </strong> <?php echo $dob;?><br/>
+    <strong>Address : </strong> <?php echo $addr;?><br/>
+    <strong>Contact number : </strong> <?php echo $ph;?><br/>
+    <strong>Program : </strong> <?php echo $prog;?><br/>
+    <strong>Department : </strong> <?php echo $dept;?><br/>
+    <strong>Semester : </strong> <?php echo $sem;?><br/>
+    <br/>
+    <strong>Select image to upload:</strong>
     <br><br>
     <input type="file" name="fileToUpload" id="fileToUpload">
+    <?php
+    if(isLoginSessionExpired()) {
+        $_SESSION['counter']=true;
+        header("Location:logout.php?session_expired=1");
+    }
+    else
+    {
+        $_SESSION['loggedin_time'] = time();
+    }
+    ?>
     <input type="submit" value="Upload Image" name="submit">
-     <img src='/uploads/abc.jpg' style="border-radius: 50%;"  width="100px"/>
+    <img src='/uploads/<?php echo $_SESSION[roll];?>.<?php echo $_SESSION[file];?>' style="border-radius: 50%;"  width="100px" height="400px" />
         </fieldset>
 
 

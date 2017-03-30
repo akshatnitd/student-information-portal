@@ -2,7 +2,7 @@
  
 define('HOST','localhost');
 define('USER','root');
-define('PASS','labwebsite');
+define('PASS','');
 define('DB','student_information_portal');
 
 function test_input($data)

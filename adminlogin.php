@@ -28,6 +28,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
         $_SESSION['email']=$_POST["email"];
         $_SESSION['pass']=$_POST["pass"];
         $_SESSION['type']="admin";
+        $_SESSION['loggedin_time'] = time(); 
         header('Location: admin.php'); 
      }
     
