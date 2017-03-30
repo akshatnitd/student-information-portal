@@ -28,6 +28,14 @@ session_start();
     <div id="msform">
         <!-- fieldsets -->
         <fieldset>
+            <?php
+
+             if(isset($_GET["session_expired"]))
+            {      
+                    echo "<strong>Your session has expired</strong>";
+                    echo "<br/>";
+            }
+            ?>
             <h2 class="fs-title">You have been successfully logged out!</h2>
             <br />
             <a href='/'>

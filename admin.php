@@ -4,6 +4,24 @@ if(!isset($_SESSION['type']) || $_SESSION['type']!= 'admin')
 {
 	header("location: adminlogin.php");
 }
+function isLoginSessionExpired() {
+    $login_session_duration = 300; 
+    $current_time = time(); 
+    if(isset($_SESSION['loggedin_time']) and isset($_SESSION['email'])){  
+        if(((time() - $_SESSION['loggedin_time']) > $login_session_duration)){ 
+            return true; 
+        } 
+    }
+    return false;
+}
+if(isLoginSessionExpired()) {
+        $_SESSION['counter']=true;
+        header("Location:logout.php?session_expired=1");
+    }
+else
+    {
+        $_SESSION['loggedin_time'] = time();
+    }
 define('HOST','localhost');
 define('USER','root');
 define('PASS','labwebsite');
