@@ -11,7 +11,7 @@
  
 define('HOST','localhost');
 define('USER','root');
-define('PASS','labwebsite');
+define('PASS','');
 define('DB','student_information_portal');
 $error=false;
 function test_input($data)
@@ -26,10 +26,12 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 {
     $email = test_input($_POST["email"]);
     $pass = test_input($_POST["pass"]);
+    $roll = test_input($_POST["roll"]);
 
     $con = mysqli_connect(HOST,USER,PASS,DB);
 
-    $sql = "SELECT * FROM users WHERE  email='".$email."' and password='".$pass."' ";
+   $sql = "SELECT * FROM users WHERE  email='".$email."' and password='".$pass."' and roll='".$roll."'";
+
 
     $res = mysqli_query($con,$sql);
      
@@ -43,11 +45,12 @@ if($_SERVER['REQUEST_METHOD']=='POST')
             'lname'=>$row[1],
             'gender'=>$row[2],
             'dob'=>$row[3],
-            'addr'=>$row[4],
-            'roll'=>$row[5],
-            'prog'=>$row[6],
-            'dept'=>$row[7],
-            'sem'=>$row[8]
+            'ph'=>$row[4],
+            'addr'=>$row[5],
+            'roll'=>$row[6],
+            'prog'=>$row[7],
+            'dept'=>$row[8],
+            'sem'=>$row[9],
             ));
         }
 
@@ -60,14 +63,27 @@ if($_SERVER['REQUEST_METHOD']=='POST')
         {
 
             session_start();
+            $_SESSION['roll']=$_POST["roll"];
             $_SESSION['email']=$_POST["email"];
             $_SESSION['pass']=$_POST["pass"];
             $_SESSION['type']='stu';
-            echo "success\n";
+            $_SESSION['fname']=$result[0]['fname'];
+            $_SESSION['lname']=$result[0]['lname'];
+            $_SESSION['gender']=$result[0]['gender'];
+            $_SESSION['dob']=$result[0]['dob'];
+            $_SESSION['addr']=$result[0]['addr'];
+            $_SESSION['ph']=$result[0]['ph'];
+            $_SESSION['prog']=$result[0]['prog'];
+            $_SESSION['dept']=$result[0]['dept'];
+            $_SESSION['sem']=$result[0]['sem'];
+            $_SESSION['loggedin_time'] = time(); 
+            //echo
+            //echo "success\n";
             //$_SESSION['email']=$_POST["email"];
             //$_SESSION['pass']=$_POST["pass"];
             header('Location: home.php');   
-            //echo json_encode(array("result"=>$result));    
+            //echo json_encode(array("result"=>$result));
+            
         }
 
         mysqli_close($con);
@@ -92,10 +108,12 @@ if($_SERVER['REQUEST_METHOD']=='POST')
                     echo "<div style='color: #f00; padding-bottom: 10px;' >Incorrect credentials!</div>"
                     ?>
             </div>
-            <input type="text" id='email' name="email" placeholder="Email" onfocusout="emailfunc()" required/>
+            <input type="text" id='roll' name="roll" placeholder="Roll Number" onfocusout="rollfunc()" required/>
             <div class='err' id='err1'></div>
-            <input type="password" id='pass' name="pass" placeholder="Password" onfocusout="passfunc()" required/>
+            <input type="text" id='email' name="email" placeholder="Email" onfocusout="emailfunc()" required/>
             <div class='err' id='err2'></div>
+            <input type="password" id='pass' name="pass" placeholder="Password" onfocusout="passfunc()" required/>
+            <div class='err' id='err3'></div>
 
             <input id='login_btn' type="submit" name="submit" class="action-button" value="Submit" />
         </fieldset>

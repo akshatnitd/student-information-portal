@@ -1,4 +1,22 @@
 <?php
+session_start();
+$login_session_duration = 60; 
+    $current_time = time(); 
+    if(isset($_SESSION['loggedin_time']) and isset($_SESSION['roll'])){  
+        if(((time() - $_SESSION['loggedin_time']) > $login_session_duration)){ 
+            return true; 
+        } 
+    }
+    return false;
+}
+if(isLoginSessionExpired()) {
+        $_SESSION['counter']=true;
+        header("Location:logout.php?session_expired=1");
+    }
+    else
+    {
+        $_SESSION['loggedin_time'] = time();
+    }
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -35,9 +53,11 @@ if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
-    $target_file = $target_dir .'abc.jpg';
+    $target_file = $target_dir .$_SESSION['roll'].'.'.$imageFileType ;
+    $_SESSION['file']=$imageFileType;
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        header('Location: profile.php');
 
     } else {
         echo "Sorry, there was an error uploading your file.";
