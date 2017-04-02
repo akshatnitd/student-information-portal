@@ -116,6 +116,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
             <div class='err' id='err3'></div>
 
             <input id='login_btn' type="submit" name="submit" class="action-button" value="Submit" />
+            <input id='login_btn' type="reset" name="reset" class="action-button" value="Reset" />
         </fieldset>
     </form>
 

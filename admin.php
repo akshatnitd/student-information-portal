@@ -2,7 +2,7 @@
 session_start();
 if(!isset($_SESSION['type']) || $_SESSION['type']!= 'admin')
 {
-	header("location: adminlogin.php");
+  header("location: adminlogin.php");
 }
 function isLoginSessionExpired() {
     $login_session_duration = 300; 
@@ -24,12 +24,12 @@ else
     }
 define('HOST','localhost');
 define('USER','root');
-define('PASS','');
+define('PASS','labwebsite');
 define('DB','student_information_portal');
 $email=$_SESSION['email'];
 $con = mysqli_connect(HOST,USER,PASS,DB);
 
-$sql = "SELECT * FROM users WHERE  status='inactive'";
+$sql = "SELECT * FROM users ";
 
 $res = $con->query($sql);
 
@@ -37,18 +37,18 @@ $res = $con->query($sql);
 
 <html>
 <head>
-	<title>SIP - Admin Login</title>
-	<link rel = "stylesheet"
-	type = "text/css"
-	href = "/css/home.css" />
-	<link rel = "stylesheet"
-	type = "text/css"
-	href = "/css/admin.css" />
+  <title>SIP - Admin Login</title>
+  <link rel = "stylesheet"
+  type = "text/css"
+  href = "/css/home.css" />
+  <link rel = "stylesheet"
+  type = "text/css"
+  href = "/css/admin.css" />
 
 </head>
 <body>
-	<!-- multistep form -->
-	 <div class="box">
+  <!-- multistep form -->
+   <div class="box">
         <div class='in-box'>
             <b>Hello <?php echo $email;?></b>
         </div>
@@ -58,7 +58,7 @@ $res = $con->query($sql);
         </a>
         </div>
     </div>
-	<div class="box">
+  <div class="box">
         <div class='in-box'>
             <b>Details of students to be activated</b>
         </div>
@@ -70,59 +70,65 @@ $res = $con->query($sql);
                   <tbody>
                   <tr>
                   <td>First Name</td>
-                  <td>$row[firstname]</td>
+                  <td><input type='text' name= 'fname' value ='$row[firstname]'/> </td>
                   </tr>
 
                   <tr>
                   <td>Last Name</td>
-                  <td>$row[lastname]</td>
+                  <td><input type='text' name= 'lname' value ='$row[lastname]'/> </td>
                   </tr>
 
                   <tr>
                   <td>Gender</td>
-                  <td>$row[gender]</td>
+                  <td><input type='text' name= 'gen' value ='$row[gender]'/> </td>
                   </tr>
 
                   <tr>
                   <td>DOB</td>
-                  <td>$row[dob]</td>
+                  <td><input type='text' name= 'dob' value ='$row[dob]'/> </td>
                   </tr>
 
                   <tr>
                   <td>Phone</td>
-                  <td>$row[phone]</td>
+                  <td><input type='text' name= 'phone' value ='$row[phone]'/> </td>
                   </tr>
 
                   <tr>
                   <td>Reg no</td>
-                  <td>$row[regno]</td>
+                  <td><input type='text' name= 'regno' value ='$row[regno]'/> </td>
                   </tr>
 
                   <tr>
                   <td>Roll no</td>
-                  <td>$row[roll]</td>
+                  <td><input type='text' name= 'roll' value ='$row[roll]'/> </td>
                   </tr>
 
                   <tr>
                   <td>Program</td>
-                  <td>$row[program]</td>
+                  <td><input type='text' name= 'prog' value ='$row[program]'/> </td>
                   </tr>
 
                   <tr>
                   <td>Dept</td>
-                  <td>$row[dept]</td>
+                  <td><input type='text' name= 'dept' value ='$row[dept]'/> </td>
                   </tr>
 
                   <tr>
                   <td>Semester</td>
-                  <td>$row[sem]</td>
+                  <td><input type='text' name= 'sem' value ='$row[sem]'/> </td>
                   </tr>
 
                   <tr>
                   <td>Email</td>
                   <td><input type='text' name= 'email' value ='$row[email]'/> </td>
                   </tr>
-                  <tr><td><input type='submit' value='Activate' class='action-button'/></td></tr>
+
+                  <tr>
+                  <td>Status</td>
+                  <td><input type='text' name= 'status' value ='$row[status]'/> </td>
+                  </tr>
+                  <tr><td><input type='submit' name='sub1' value='Activate' class='action-button'/> <input type='submit' name='sub2' value='Update' class='action-button'/> <input type='submit' name='sub3' value='Delete' class='action-button'/></td></tr>
+                  
                   </tbody>
                   </table>
                   </form>";
@@ -133,12 +139,12 @@ $res = $con->query($sql);
               echo "<div id='status'>
                   No inactive user
                   </div>"; 
-            $conn->close();
+            $con->close();
         }?>
 
     </div>
 
-	<script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/js/jquery.easing.1.3.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/login.js"></script>
