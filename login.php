@@ -13,7 +13,8 @@ define('HOST','localhost');
 define('USER','root');
 define('PASS','');
 define('DB','student_information_portal');
-$error=false;
+$error1=false;
+$error2=false;
 function test_input($data)
 {
     $data = trim($data);
@@ -46,18 +47,24 @@ if($_SERVER['REQUEST_METHOD']=='POST')
             'gender'=>$row[2],
             'dob'=>$row[3],
             'ph'=>$row[4],
-            'addr'=>$row[5],
-            'roll'=>$row[6],
-            'prog'=>$row[7],
-            'dept'=>$row[8],
-            'sem'=>$row[9],
+            'reg'=>$row[5],
+            'addr'=>$row[6],
+            'roll'=>$row[7],
+            'prog'=>$row[8],
+            'dept'=>$row[9],
+            'sem'=>$row[10],
+            'status'=>$row[13]
             ));
         }
 
         if (empty($result)) {
             //$('div#err').html('Incorrect credentials');
             //echo "Failed\n"; 
-            $error = true;           
+            $error1 = true;           
+        }
+        else if($result[0]['status']=='inactive')
+        {
+            $error2=true;
         }
         else
         {
@@ -104,8 +111,11 @@ if($_SERVER['REQUEST_METHOD']=='POST')
             <h2 class="fs-title">Enter your login details</h2>
             <br />
             <div id='err'>
-                <?php if ($error)
+                <?php if ($error1)
                     echo "<div style='color: #f00; padding-bottom: 10px;' >Incorrect credentials!</div>"
+                    ?>
+                    <?php if ($error2)
+                    echo "<div style='color: #f00; padding-bottom: 10px;' >Your account is not activated yet! Please contact admin.</div>"
                     ?>
             </div>
             <input type="text" id='roll' name="roll" placeholder="Roll Number" onfocusout="rollfunc()" required/>

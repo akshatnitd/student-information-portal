@@ -60,7 +60,7 @@ $res = $con->query($sql);
     </div>
   <div class="box">
         <div class='in-box'>
-            <b>Details of students to be activated</b>
+            <b>Details of students registered</b>
         </div>
         <div style="text-align: justify; padding: 20px;">
             <?php if ($res->num_rows > 0) {

@@ -57,6 +57,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
     $prog = $_POST["prog"];
     $dept = $_POST["dept"];
     $roll = $_POST["roll"];
+    $reg = $_POST["regno"];
     $sem = $_POST["sem"];
     $email = $_POST["email"];
     $status = $_POST["status"];
@@ -68,7 +69,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 
     if (isset($_POST['email'])) {
       
-      $sql = "UPDATE users SET firstname='$fname',lastname='$lname',gender='$gen',dob='$dob',phone='$phone',program='$prog',dept='$dept',sem='$sem',email='$email',status='$status' WHERE roll='$roll'";
+      $sql = "UPDATE users SET firstname='$fname',lastname='$lname',gender='$gen',dob='$dob',phone='$phone',regno='$reg',program='$prog',dept='$dept',sem='$sem',email='$email',status='$status' WHERE roll='$roll'";
       
       if (mysqli_query($con, $sql)) {
 
