@@ -76,9 +76,6 @@ if(isLoginSessionExpired()) {
                 <a href='about.php'><i class="fa fa-info"></i> About Us</a>
             </li>
             <li>
-                <a href='gallery.php'><i class="fa fa-picture-o"></i> Gallery</a>
-            </li>
-            <li>
                 <a href='notice.php'><i class="fa fa-sticky-note"></i> Notice Board</a>
             </li>
             <li>

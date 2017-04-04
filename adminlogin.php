@@ -58,6 +58,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 			<input type="text" name="email" placeholder="Email" />
 			<input type="password" name="pass" placeholder="Password" />
 			<input type="submit" name="submit" class="action-button" value="Submit" />
+			<input id='login_btn' type="reset" name="reset" class="action-button" value="Reset" />
 		</fieldset>
 
 
