@@ -15,39 +15,39 @@ session_start();
 </head>
 <body>
   <header>
-   <ul>
-            <?php
+    <ul>
+      <?php
 
-                 if(isset($_SESSION['email']))
-                {
-                    echo "<li><a href='home.php'><i class='fa fa-home'></i> Home</a></li>";        
-                
-                }
-            ?>
-            <li>
-                <a  href='about.php'><i class="fa fa-info"></i> About Us</a>
-            </li>
-            <li>
-                <a href='notice.php'><i class="fa fa-sticky-note"></i> Notice Board</a>
-            </li>
-            <li>
-                <a href='contact.php'><i class="fa fa-phone"></i> Contact Us</a>
-            </li>
+      if(isset($_SESSION['email']))
+      {
+        echo "<li><a href='home.php'><i class='fa fa-home'></i> Home</a></li>";        
 
-            <?php
+      }
+      ?>
+      <li>
+        <a  href='about.php'><i class="fa fa-info"></i> About Us</a>
+      </li>
+      <li>
+        <a href='notice.php'><i class="fa fa-sticky-note"></i> Notice Board</a>
+      </li>
+      <li>
+        <a href='contact.php'><i class="fa fa-phone"></i> Contact Us</a>
+      </li>
 
-             if(!isset($_SESSION['email']))
-            {
-                echo "<li style='float: right;'><a href='index.php'><i class='fa fa-sign-in'></i> Sign In / Sign Up</a></li>";                
-            
-            }
-            else
-            {
-                echo "<li style='float: right;'><a href='logout.php'><i class='fa fa-sign-in'></i> Sign Out</a></li><li style='float: right;'><a href='profile.php'><i class='fa fa-user'></i> My Profile</a></li>";
-            }  
-            ?>
-        </ul>
-    
+      <?php
+
+      if(!isset($_SESSION['email']))
+      {
+        echo "<li style='float: right;'><a href='index.php'><i class='fa fa-sign-in'></i> Sign In / Sign Up</a></li>";                
+
+      }
+      else
+      {
+        echo "<li style='float: right;'><a href='logout.php'><i class='fa fa-sign-in'></i> Sign Out</a></li><li style='float: right;'><a href='profile.php'><i class='fa fa-user'></i> My Profile</a></li>";
+      }  
+      ?>
+    </ul>
+
     <h1 class="fs-title" style="text-align: center; color: #fff; font-size: 24px; padding-top: 50px;">
       WELCOME TO STUDENT INFORMATION PORTAL
     </h1>
