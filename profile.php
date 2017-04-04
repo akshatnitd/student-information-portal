@@ -106,6 +106,7 @@ if(isLoginSessionExpired()) {
 <br/>
 <h3>Here are your profile details:</h3>
 <br/>
+      <img src='/uploads/<?php echo $_SESSION[reg];?>.jpg' style="border-radius: 50%; height: 100px; width: 100px;" /><br /><br />
     <strong>First Name : </strong> <?php echo $fname;?><br/>
     <strong>Last Name : </strong> <?php echo $lname;?><br/>
     <strong>Gender : </strong> <?php echo $gender;?><br/>
@@ -130,7 +131,7 @@ if(isLoginSessionExpired()) {
     }
     ?>
     <input type="submit" value="Upload Image" name="submit">
-    <img src='/uploads/<?php echo $_SESSION[roll];?>.<?php echo $_SESSION[file];?>' style="border-radius: 50%;"  width="100px" height="400px" />
+  
         </fieldset>
 
 

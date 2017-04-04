@@ -1,22 +1,25 @@
 <?php
 session_start();
-$login_session_duration = 60; 
+
+function isLoginSessionExpired() {
+    $login_session_duration = 300; 
     $current_time = time(); 
-    if(isset($_SESSION['loggedin_time']) and isset($_SESSION['roll'])){  
+    if(isset($_SESSION['loggedin_time']) and isset($_SESSION['reg'])){  
         if(((time() - $_SESSION['loggedin_time']) > $login_session_duration)){ 
             return true; 
         } 
-    }
+    } 
     return false;
 }
+
 if(isLoginSessionExpired()) {
         $_SESSION['counter']=true;
         header("Location:logout.php?session_expired=1");
     }
-    else
-    {
-        $_SESSION['loggedin_time'] = time();
-    }
+else
+{
+    $_SESSION['loggedin_time'] = time();
+}
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -43,9 +46,8 @@ if ($_FILES["fileToUpload"]["size"] > 500000) {
     $uploadOk = 0;
 }
 // Allow certain file formats
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
-    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+if($imageFileType != "jpg") {
+    echo "Sorry, only JPG are allowed.";
     $uploadOk = 0;
 }
 // Check if $uploadOk is set to 0 by an error
@@ -53,7 +55,8 @@ if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
-    $target_file = $target_dir .$_SESSION['roll'].'.'.$imageFileType ;
+    $name= $_SESSION['reg'];
+    $target_file = $target_dir .$name.'.jpg' ;
     $_SESSION['file']=$imageFileType;
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";

@@ -11,7 +11,7 @@
  
 define('HOST','localhost');
 define('USER','root');
-define('PASS','');
+define('PASS','labwebsite');
 define('DB','student_information_portal');
 $error1=false;
 $error2=false;
@@ -46,9 +46,9 @@ if($_SERVER['REQUEST_METHOD']=='POST')
             'lname'=>$row[1],
             'gender'=>$row[2],
             'dob'=>$row[3],
-            'ph'=>$row[4],
-            'reg'=>$row[5],
-            'addr'=>$row[6],
+            'ph'=>$row[5],
+            'reg'=>$row[6],
+            'addr'=>$row[4],
             'roll'=>$row[7],
             'prog'=>$row[8],
             'dept'=>$row[9],
@@ -79,6 +79,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
             $_SESSION['gender']=$result[0]['gender'];
             $_SESSION['dob']=$result[0]['dob'];
             $_SESSION['addr']=$result[0]['addr'];
+            $_SESSION['reg']=$result[0]["reg"];
             $_SESSION['ph']=$result[0]['ph'];
             $_SESSION['prog']=$result[0]['prog'];
             $_SESSION['dept']=$result[0]['dept'];
